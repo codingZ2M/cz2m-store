@@ -3,10 +3,16 @@ import Link from 'next/link'
 import tw from "tailwind-styled-components"
 import {BiPhone} from "react-icons/bi";
 import {BiCart} from "react-icons/bi";
+import Cart from './Cart'
 
+import { useStateContext } from '../context/StateContext';
 
 const NavBar = () => {
+
+  const {showCart, setShowCart, totalQuantities} = useStateContext();
+
   return (
+    <>
     <NavBarContainer>
         <CallOrder>
             <Call/>
@@ -25,13 +31,22 @@ const NavBar = () => {
            
         <MenuRight>
             <CartItem>
-                <Cart/>
+                <CartIcon onClick={ ()=> setShowCart(true) } />
                 <CounterCircle>
-                    <span className='text-sm text-white'>3</span>
+                    <span className='text-sm text-white'>{totalQuantities}</span>
                 </CounterCircle>
             </CartItem>
+            <CartContainer>
+              {
+                showCart &&  <Cart/>
+              }
+              
+            </CartContainer>
         </MenuRight>
+      
     </NavBarContainer>
+   
+   </>
   )
 }
 
@@ -79,6 +94,11 @@ const CounterCircle = tw.div`
     absolute right-8 top-4
 `;
 
-const Cart = tw(BiCart)`
+const CartIcon = tw(BiCart)`
    h-6 w-6 text-white
+`;
+
+
+const CartContainer  = tw.div`
+    flex absolute right-21 top-12
 `;

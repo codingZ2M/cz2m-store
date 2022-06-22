@@ -1,10 +1,11 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import tw from "tailwind-styled-components"
 import Link from 'next/link';
 import { urlFor } from '../lib/SanityClient';
 import Image from 'next/image';
 
 const Product = ({product}) => {
+
   return (
   
     <ProductContainer>
